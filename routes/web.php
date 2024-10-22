@@ -15,4 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.home');
-});
+})->name("home");
+
+
+Route::get('/pokemons', function () {
+    $pokemons = config("db.pokemon");
+    return view('pages.pokemon-index', compact("pokemons"));
+})->name("pokemons-index");
+
