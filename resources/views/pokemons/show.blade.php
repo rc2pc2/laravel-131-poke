@@ -1,20 +1,19 @@
 @extends("layouts.app")
 
-@section("page-title", "Pokemon Index")
+@section("page-title", $pokemon["name"])
 
 @section("main-content")
 <section class="container py-4">
     <div class="row">
         <div class="col-12">
             <h1>
-                Pokemon index page
+                {{  $pokemon["name"] }} Page
             </h1>
         </div>
     </div>
     <div class="row justify-content-around">
-        {{-- ripeto questo elemento --}}
-        @foreach ( $pokemons as $pokemon )
-        <div class="col-3 card m-3">
+        <div class="col-12 card m-3">
+            <img src="{{  $pokemon["image"] }}" alt="" class="w-25">
             <ul>
                 <li>
                     Nome: {{ $pokemon["name"] }}
@@ -28,12 +27,11 @@
                 <li>
                     Elemento: {{ $pokemon["element"] }}
                 </li>
-                <li>
-                    Url immagine: {{ $pokemon["image"] }}
-                </li>
+
+
+
             </ul>
         </div>
-        @endforeach
     </div>
 </section>
 @endsection

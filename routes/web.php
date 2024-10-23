@@ -20,6 +20,18 @@ Route::get('/', function () {
 
 Route::get('/pokemons', function () {
     $pokemons = config("db.pokemon");
-    return view('pages.pokemon-index', compact("pokemons"));
+    // dd(compact("pokemons")); // # dump and die
+    return view('pokemons.index', compact("pokemons"));  // < [ "pokemons" => $pokemons ]
 })->name("pokemons-index");
 
+Route::get('/pokemons/{index}', function (string $index) {
+    // dd($index);
+    $pokemons = config("db.pokemon");
+    if (isset($pokemons[$index])){
+        $pokemon = $pokemons[$index];
+        // dd($pokemon);
+        return view('pokemons.show', compact("pokemon") );
+    } else {
+        abort(404);
+    }
+})->name("pokemons.show");
