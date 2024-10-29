@@ -3,69 +3,65 @@
 @section("page-title", "Pokemon Index")
 
 @section("main-content")
-<section class="container py-4">
-    <div class="row">
-        <div class="col-12">
-            <h1>
-                Pokemon index page
-            </h1>
-        </div>
-    </div>
-    <div class="row justify-content-around">
-        {{-- ripeto questo elemento --}}
-        @foreach ( $pokemons as $index => $pokemon )
-        <div class="col-3 card m-3">
-            <ul>
-                <li>
-                    <a href="{{ route("pokemons.show", $index) }}">
-                        Nome: {{ $pokemon["name"] }}
-                    </a>
-                </li>
-                <li>
-                    Specie: {{ $pokemon["species"] }}
-                </li>
-                <li>
-                    Abilita': {{ $pokemon["ability"] }}
-                </li>
-                <li>
-                    Elemento: {{ $pokemon["element"] }}
-                </li>
-                <li>
-                    Url immagine: {{ $pokemon["image"] }}
-                </li>
-            </ul>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#pokemon-modal-{{$index}}">
-                Visualizza info
-            </button>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="pokemon-modal-{{$index}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                    Nome: {{ $pokemon["name"] }}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="py-3 fw-bold text-center">
+                    Pokemon list:
                 </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Specie: {{ $pokemon["species"] }}
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
             </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <a href="{{ route("pokemon.create") }}" class="btn btn-primary btn-lg">
+                        Create new pokemon
+                    </a>
+                </div>
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Species</th>
+                            <th scope="col">Ability</th>
+                            <th scope="col">Element</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ( $pokemons as $index => $pokemon )
+                        <tr>
+                            <td>
+                                {{ $pokemon->id }}
+                            </td>
+                            <td>
+                                {{ $pokemon->name }}
+                            </td>
+                            <td>
+                                {{ $pokemon->species }}
+                            </td>
+                            <td>
+                                {{ $pokemon->ability }}
+                            </td>
+                            <td>
+                                {{ $pokemon->element }}
+                            </td>
+                            <td>
+                                <a href="{{ route("pokemon.show", $pokemon->id) }}" class="btn btn-sm btn-primary me-2">Show</a>
+                                <a href="#" class="btn btn-sm btn-success me-2">Edit</a>
+                                <a href="#" class="btn btn-sm btn-warning me-2">Delete</a>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6">No pokemon are available at the moment...</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
-        @endforeach
     </div>
-</section>
-
-
 @endsection
-
 
 
 

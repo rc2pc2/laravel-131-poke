@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {  return view('pages.home');})->name("home");
 
 // % READ delle cRud
-Route::get("/pokemons", [PokemonController::class, "index"])->name("pokemons.index");
-Route::get("/pokemons/{id}", [PokemonController::class, "show"])->name("pokemons.show");
+Route::get("/pokemons", [PokemonController::class, "index"])->name("pokemon.index");
+Route::post("/pokemons", [PokemonController::class, "store"])->name("pokemon.store");
+Route::get("/pokemons/create", [PokemonController::class, "create"])->name("pokemon.create");
+Route::get("/pokemons/{id}", [PokemonController::class, "show"])->name("pokemon.show");
