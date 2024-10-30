@@ -9,10 +9,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link {{ (Route::currentRouteName() == 'home') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route("pokemon.index") }}">Pokemon Index</a>
+                        <a class="nav-link {{ (Route::currentRouteName() == 'pokemon.index') ? 'active' : '' }}" href="{{ route("pokemon.index") }}">Pokemon</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (Route::currentRouteName() == 'environment.index') ? 'active' : '' }}" href="{{ route("environment.index") }}">Environments</a>
                     </li>
                 </ul>
             </div>
