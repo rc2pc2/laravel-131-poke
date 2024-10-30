@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\PokemonController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,10 @@ Route::get("/pokemons", [PokemonController::class, "index"])->name("pokemon.inde
 Route::post("/pokemons", [PokemonController::class, "store"])->name("pokemon.store");
 Route::get("/pokemons/create", [PokemonController::class, "create"])->name("pokemon.create");
 Route::get("/pokemons/{id}", [PokemonController::class, "show"])->name("pokemon.show");
+
+
+// ! Risorsa environment
+Route::get("/environments", [EnvironmentController::class, "index"])->name("environment.index");
+Route::get("/environments/create", [EnvironmentController::class, "create"])->name("environment.create");
+Route::get("/environments/{id}", [EnvironmentController::class, "show"])->name("environment.show");
+Route::post("/environments", [EnvironmentController::class, "store"])->name("environment.store");
