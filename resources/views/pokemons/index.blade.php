@@ -47,8 +47,15 @@
                             </td>
                             <td>
                                 <a href="{{ route("pokemon.show", $pokemon->id) }}" class="btn btn-sm btn-primary me-2">Show</a>
-                                <a href="#" class="btn btn-sm btn-success me-2">Edit</a>
-                                <a href="#" class="btn btn-sm btn-warning me-2">Delete</a>
+                                <a href="{{ route("pokemon.edit", $pokemon->id) }}" class="btn btn-sm btn-success me-2">Edit</a>
+                                <form action="{{ route("pokemon.delete", $pokemon->id) }}" method="POST" class="d-inline pokemon-destroyer" custom-data-name="{{ $pokemon->name }}">
+                                    @csrf
+                                    @method("DELETE")
+
+                                    <button type="submit" class="btn btn-sm btn-warning">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @empty
@@ -64,4 +71,6 @@
 @endsection
 
 
-
+@section("additional-scripts")
+    @vite("resources/js/pokemons/delete-confirmation.js")
+@endsection

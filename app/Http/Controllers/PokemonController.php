@@ -68,7 +68,8 @@ class PokemonController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pokemon = Pokemon::findOrFail($id);
+        return view("pokemons.edit", compact("pokemon"));
     }
 
     /**
@@ -76,7 +77,18 @@ class PokemonController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $formData = $request->all();
+        $pokemon = Pokemon::findOrFail($id);
+        // $pokemon->name = $formData["name"];
+        // $pokemon->species = $formData["species"];
+        // $pokemon->ability = $formData["ability"];
+        // $pokemon->element = $formData["element"];
+        // $pokemon->image = $formData["image"];
+        // $pokemon->update();
+
+        $pokemon->update($formData);
+
+        return redirect()->route("pokemon.show", [ "id" => $pokemon->id]);
     }
 
     /**
@@ -84,6 +96,9 @@ class PokemonController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pokemon = Pokemon::findOrFail($id); // % trova il pokemon
+        $pokemon->delete(); // # se l'hai trovato cancellalo dal db
+
+        return redirect()->route("pokemon.index");
     }
 }

@@ -13,7 +13,6 @@ class EnvironmentController extends Controller
     public function index()
     {
         $environments = Environment::all();
-
         return view("environments.index", compact("environments"));
     }
 
@@ -76,5 +75,9 @@ class EnvironmentController extends Controller
     public function destroy(Environment $environment)
     {
         //
+    }
+
+    public function metodoCheVoglio(){
+
     }
 }
