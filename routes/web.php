@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EnvironmentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PokemonController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,17 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {  return view('pages.home');})->name("home");
+Route::get('/', [HomeController::class, "index"])->name("home");
 
-// % READ delle cRud
+// % Risorsa Pokemon
 Route::get("/pokemons", [PokemonController::class, "index"])->name("pokemon.index");
 Route::post("/pokemons", [PokemonController::class, "store"])->name("pokemon.store");
 Route::get("/pokemons/create", [PokemonController::class, "create"])->name("pokemon.create");
 Route::get("/pokemons/{id}", [PokemonController::class, "show"])->name("pokemon.show");
 
-
-// ! Risorsa environment
-Route::get("/environments", [EnvironmentController::class, "index"])->name("environment.index");
-Route::get("/environments/create", [EnvironmentController::class, "create"])->name("environment.create");
-Route::get("/environments/{id}", [EnvironmentController::class, "show"])->name("environment.show");
-Route::post("/environments", [EnvironmentController::class, "store"])->name("environment.store");
+// ! Risorsa Environment
+Route::prefix("/environments")->name("environment.")->group(function(){
+    Route::get("/", [EnvironmentController::class, "index"])->name("index");
+    Route::get("/create", [EnvironmentController::class, "create"])->name("create");
+    Route::get("/{id}", [EnvironmentController::class, "show"])->name("show");
+    Route::post("/", [EnvironmentController::class, "store"])->name("store");
+});
+// < Raggruppare una serie di rotte, che hanno il nome che inizia per x, il prefisso al loro indirzzo che inizia per y
