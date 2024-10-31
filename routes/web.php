@@ -27,24 +27,20 @@ Route::get("/pokemons/{id}/edit", [PokemonController::class, "edit"])->name("pok
 Route::put("/pokemons/{id}", [PokemonController::class, "update"])->name("pokemon.update");
 Route::delete("/pokemons/{id}", [PokemonController::class, "destroy"])->name("pokemon.delete");
 
-
-
-
-
+Route::get("/environments", [EnvironmentController::class, "index"])->name("environment.index");
+Route::get("/environments/deleted", [EnvironmentController::class, "deletedIndex"])->name("environment.deleted-index");
+Route::post("/environments", [EnvironmentController::class, "store"])->name("environment.store");
+Route::get("/environments/create", [EnvironmentController::class, "create"])->name("environment.create");
+Route::get("/environments/{environment}", [EnvironmentController::class, "show"])->name("environment.show");
+Route::put("/environments/{environment}", [EnvironmentController::class, "update"])->name("environment.update");
+Route::delete("/environments/{environment}", [EnvironmentController::class, "destroy"])->name("environment.delete");
+Route::delete("/environments/{environment}/permanent-delete", [EnvironmentController::class, "environment.permanentDelete"])->name("permanent-delete");
+Route::get("/environments/{environment}/edit", [EnvironmentController::class, "edit"])->name("environment.edit");
+Route::patch("/environments/{environment}/restore", [EnvironmentController::class, "restore"])->name("environment.restore");
 
 
 
 // ! Risorsa Environment
-Route::prefix("/environments")->name("environment.")->group(function(){
-    Route::get("/", [EnvironmentController::class, "index"])->name("index");
-    Route::get("/deleted", [EnvironmentController::class, "deletedIndex"])->name("deleted-index");
-    Route::post("/", [EnvironmentController::class, "store"])->name("store");
-    Route::get("/create", [EnvironmentController::class, "create"])->name("create");
-    Route::get("/{id}", [EnvironmentController::class, "show"])->name("show");
-    Route::put("/{id}", [EnvironmentController::class, "update"])->name("update");
-    Route::delete("/{id}", [EnvironmentController::class, "destroy"])->name("delete");
-    Route::delete("/{id}/permanent-delete", [EnvironmentController::class, "permanentDelete"])->name("permanent-delete");
-    Route::get("/{id}/edit", [EnvironmentController::class, "edit"])->name("edit");
-    Route::patch("/{id}/restore", [EnvironmentController::class, "restore"])->name("restore");
-});
+// Route::prefix("/environments")->name("environment.")->group(function(){
+// });
 // < Raggruppare una serie di rotte, che hanno il nome che inizia per x, il prefisso al loro indirzzo che inizia per y

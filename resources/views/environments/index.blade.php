@@ -46,7 +46,7 @@
                                 <img src="{{ $environment->image }}" alt="" height="20" width="20">
                             </td>
                             <td>
-                                <a href="{{ route("environment.show", $environment->id) }}" class="btn btn-sm btn-primary me-2">Show</a>
+                                <a href="{{ route("environment.show", $environment) }}" class="btn btn-sm btn-primary me-2">Show</a>
                                 <a href="{{ route("environment.edit", $environment->id) }}"  class="btn btn-sm btn-success me-2">Edit</a>
 
                                 <form class="d-inline env-destroyer" action="{{ route("environment.delete", $environment->id) }}" method="POST" custom-data-name="{{ $environment->name }}" >

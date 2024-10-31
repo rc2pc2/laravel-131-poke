@@ -46,30 +46,26 @@ class EnvironmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Environment $environment) // find or fail
     {
-        $environment = Environment::findOrFail($id);
-
         return view("environments.show", compact("environment"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Environment $environment)
     {
         // # findOrFail sul model creato, cerco la id che ho passato alla funzione?
-        $environment = Environment::findOrFail($id);
         return view("environments.edit", compact("environment"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Environment $environment)
     {
         $data = $request->all();
-        $environment = Environment::findOrFail($id);
         // $environment->name = $data["name"];
         // $environment->element = $data["element"];
         // $environment->walking_speed = $data["walking_speed"];
@@ -85,9 +81,8 @@ class EnvironmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Environment $environment)
     {
-        $environment = Environment::findOrFail($id);
         $environment->delete();
         return redirect()->route("environment.index");
     }
