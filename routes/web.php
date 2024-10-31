@@ -34,7 +34,7 @@ Route::get("/environments/create", [EnvironmentController::class, "create"])->na
 Route::get("/environments/{environment}", [EnvironmentController::class, "show"])->name("environment.show");
 Route::put("/environments/{environment}", [EnvironmentController::class, "update"])->name("environment.update");
 Route::delete("/environments/{environment}", [EnvironmentController::class, "destroy"])->name("environment.delete");
-Route::delete("/environments/{environment}/permanent-delete", [EnvironmentController::class, "environment.permanentDelete"])->name("permanent-delete");
+Route::delete("/environments/{environment}/permanent-delete", [EnvironmentController::class, "permanentDelete"])->name("environment.permanent-delete");
 Route::get("/environments/{environment}/edit", [EnvironmentController::class, "edit"])->name("environment.edit");
 Route::patch("/environments/{environment}/restore", [EnvironmentController::class, "restore"])->name("environment.restore");
 
