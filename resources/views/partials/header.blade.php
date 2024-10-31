@@ -17,6 +17,9 @@
                     <li class="nav-item">
                         <a class="nav-link {{ (Route::currentRouteName() == 'environment.index') ? 'active' : '' }}" href="{{ route("environment.index") }}">Environments</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (Route::currentRouteName() == 'environment.deleted-index') ? 'active' : '' }}" href="{{ route("environment.deleted-index") }}">Deleted environments</a>
+                    </li>
                 </ul>
             </div>
         </div>

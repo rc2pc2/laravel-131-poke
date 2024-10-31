@@ -7,15 +7,10 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="py-3 fw-bold text-center">
-                    Environment list:
+                    Deleted environments list:
                 </h1>
             </div>
             <div class="col-12">
-                <div class="mb-3">
-                    <a href="{{ route("environment.create") }}" class="btn btn-primary btn-lg">
-                        Create new environment
-                    </a>
-                </div>
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
@@ -46,15 +41,24 @@
                                 <img src="{{ $environment->image }}" alt="" height="20" width="20">
                             </td>
                             <td>
-                                <a href="{{ route("environment.show", $environment->id) }}" class="btn btn-sm btn-primary me-2">Show</a>
-                                <a href="{{ route("environment.edit", $environment->id) }}"  class="btn btn-sm btn-success me-2">Edit</a>
+                                <form class="d-inline me-2"
+                                    action="{{ route("environment.restore", $environment->id) }}"
+                                    method="POST">
+                                    @method("PATCH")
+                                    @csrf
 
-                                <form class="d-inline env-destroyer" action="{{ route("environment.delete", $environment->id) }}" method="POST" custom-data-name="{{ $environment->name }}" >
+                                    <button type="submit" class="btn btn-sm btn-success me-2">
+                                        Restore
+                                    </button>
+                                </form>
+
+
+                                <form class="d-inline env-destroyer" action="{{ route("environment.permanent-delete", $environment->id) }}" method="POST" custom-data-name="{{ $environment->name }}" >
                                     @method("DELETE")
                                     @csrf
 
                                     <button type="submit" class="btn btn-sm btn-warning me-2">
-                                        Delete
+                                        Permanent Delete
                                     </button>
                                 </form>
                             </td>

@@ -56,28 +56,59 @@ class EnvironmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Environment $environment)
+    public function edit(string $id)
     {
-        //
+        // # findOrFail sul model creato, cerco la id che ho passato alla funzione?
+        $environment = Environment::findOrFail($id);
+        return view("environments.edit", compact("environment"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Environment $environment)
+    public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $environment = Environment::findOrFail($id);
+        // $environment->name = $data["name"];
+        // $environment->element = $data["element"];
+        // $environment->walking_speed = $data["walking_speed"];
+        // $environment->image = $data["image"];
+        // $environment->update();
+        // $environment = Environment::create($data);
+
+        $environment->update($data);
+
+        return redirect()->route("environment.show", $environment->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Environment $environment)
+    public function destroy(string $id)
     {
-        //
+        $environment = Environment::findOrFail($id);
+        $environment->delete();
+        return redirect()->route("environment.index");
     }
 
-    public function metodoCheVoglio(){
+    public function deletedIndex(){
+        $environments = Environment::onlyTrashed()->get();
+        // dd($environments);
+        return view("environments.deleted-index", compact("environments"));
+    }
 
+    public function restore(string $id){
+        $environment = Environment::onlyTrashed()->findOrFail($id);
+        $environment->restore();
+
+        return redirect()->route("environment.index");
+    }
+
+    public function permanentDelete(string $id){
+        $environment = Environment::onlyTrashed()->findOrFail($id);
+        $environment->forceDelete();
+
+        return redirect()->route("environment.deleted-index");
     }
 }

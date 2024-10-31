@@ -37,8 +37,14 @@ Route::delete("/pokemons/{id}", [PokemonController::class, "destroy"])->name("po
 // ! Risorsa Environment
 Route::prefix("/environments")->name("environment.")->group(function(){
     Route::get("/", [EnvironmentController::class, "index"])->name("index");
+    Route::get("/deleted", [EnvironmentController::class, "deletedIndex"])->name("deleted-index");
     Route::post("/", [EnvironmentController::class, "store"])->name("store");
     Route::get("/create", [EnvironmentController::class, "create"])->name("create");
     Route::get("/{id}", [EnvironmentController::class, "show"])->name("show");
+    Route::put("/{id}", [EnvironmentController::class, "update"])->name("update");
+    Route::delete("/{id}", [EnvironmentController::class, "destroy"])->name("delete");
+    Route::delete("/{id}/permanent-delete", [EnvironmentController::class, "permanentDelete"])->name("permanent-delete");
+    Route::get("/{id}/edit", [EnvironmentController::class, "edit"])->name("edit");
+    Route::patch("/{id}/restore", [EnvironmentController::class, "restore"])->name("restore");
 });
 // < Raggruppare una serie di rotte, che hanno il nome che inizia per x, il prefisso al loro indirzzo che inizia per y
