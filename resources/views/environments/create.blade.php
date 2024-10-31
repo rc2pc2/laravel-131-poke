@@ -5,6 +5,19 @@
 @section("main-content")
 <section class="container py-4">
     <div class="row justify-content-around">
+
+        @if( $errors->any())
+            <div class="col-12 alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form class="col-12 col-md-6 card m-3" method="POST" action="{{ route("environment.store") }}">
             @csrf
 

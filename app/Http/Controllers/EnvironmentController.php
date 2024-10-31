@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEnvironmentRequest;
 use App\Models\Environment;
-use Illuminate\Http\Request;
 
 class EnvironmentController extends Controller
 {
@@ -27,9 +27,9 @@ class EnvironmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEnvironmentRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validate();
 
         // $environment = new Environment();
         // $environment->name = $data["name"];
@@ -63,9 +63,9 @@ class EnvironmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Environment $environment)
+    public function update(StoreEnvironmentRequest $request, Environment $environment)
     {
-        $data = $request->all();
+        $data = $request->validate();
         // $environment->name = $data["name"];
         // $environment->element = $data["element"];
         // $environment->walking_speed = $data["walking_speed"];

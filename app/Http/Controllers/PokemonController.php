@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePokemonRequest;
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
 
@@ -40,26 +41,10 @@ class PokemonController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePokemonRequest $request)
     {
-        $formData = $request->all();
-
-        // % popolamento del pokemon a manina
-        $pokemon = new Pokemon();
-        $pokemon->name = $formData["name"];
-        $pokemon->species = $formData["species"];
-        $pokemon->ability = $formData["ability"];
-        $pokemon->element = $formData["element"];
-        $pokemon->image = $formData["image"];
-        $pokemon->save();
-
-        // $pokemon = new Pokemon();
-        // $pokemon->fill($formData);
-        // $pokemon->save();
-
-        // < popolamento con le fillable
-        // $pokemon = Pokemon::create($formData);
-
+        $formData = $request->validate();
+        $pokemon = Pokemon::create($formData);
         return redirect()->route("pokemon.show", [ "id" => $pokemon->id]);
     }
 
@@ -75,19 +60,11 @@ class PokemonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StorePokemonRequest $request, string $id)
     {
-        $formData = $request->all();
+        $formData = $request->validate();
         $pokemon = Pokemon::findOrFail($id);
-        // $pokemon->name = $formData["name"];
-        // $pokemon->species = $formData["species"];
-        // $pokemon->ability = $formData["ability"];
-        // $pokemon->element = $formData["element"];
-        // $pokemon->image = $formData["image"];
-        // $pokemon->update();
-
         $pokemon->update($formData);
-
         return redirect()->route("pokemon.show", [ "id" => $pokemon->id]);
     }
 

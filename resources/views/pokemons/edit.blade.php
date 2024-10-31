@@ -15,27 +15,52 @@
             </h1>
             <div class="mb-3">
                 <label for="pokemon-name" class="form-label">Name:</label>
-                <input type="text" class="form-control" id="pokemon-name" name="name" value="{{ $pokemon->name }}">
+                <input type="text" class="form-control" id="pokemon-name" name="name" value="{{ old('name', $pokemon->name) }}">
+                @error("name")
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="pokemon-species" class="form-label">Species:</label>
                 <input type="text" class="form-control" id="pokemon-species" name="species"
-                value="{{ $pokemon->species }}">
+                value="{{ old('species', $pokemon->species) }}">
+                @error("species")
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="pokemon-ability" class="form-label">Ability:</label>
                 <input type="text" class="form-control" id="pokemon-ability" name="ability"
-                value="{{ $pokemon->ability }}">
+                value="{{ old('ability', $pokemon->ability) }}">
+                @error("ability")
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="pokemon-element" class="form-label">Element:</label>
                 <input type="text" class="form-control" id="pokemon-element" name="element"
-                value="{{ $pokemon->element }}">
+                value="{{ old('element', $pokemon->element) }}">
+                @error("element")
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="pokemon-image" class="form-label">Image url:</label>
                 <input type="text" class="form-control" id="pokemon-image" name="image"
-                value="{{ $pokemon->image }}">
+                value="{{ old('image', $pokemon->image) }}">
+                @error("image")
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3 d-flex justify-content-center align-items-center">
                 <button type="submit" class="btn btn-success me-3">
