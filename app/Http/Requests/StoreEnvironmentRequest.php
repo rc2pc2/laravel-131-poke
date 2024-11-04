@@ -22,10 +22,19 @@ class StoreEnvironmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|min:3|max:255",
-            "element" => "required|string|min:3|max:255",
-            "walking_speed" => "required|numeric|integer|min:0|max:100",
-            "image" => "required|url",
+            "name" => ["required", "string", "min:2", "max: 50"],
+            "element" => ["required", "string", "min:3", "max:255"],
+            "walking_speed" => ["required", "numeric", "integer", "min:1", "max:100"],
+            "image" => ["required", "url"],
+        ];
+    }
+
+    public function messages(){
+        return [
+            "name.required" => "Il nome e' obbligatorio",
+            "element.required" => "L'elemento e' obbligatorio",
+            "walking_speed.required" => "La velocita' di movimento e' obbligatoria",
+            "image.required" => "L'immagine e' obbligatoria",
         ];
     }
 }
